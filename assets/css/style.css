@@ -1,0 +1,71 @@
+.richvision-registration-form {
+    max-width: 500px;
+    margin: 20px auto;
+    padding: 20px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    background-color: #f9f9f9;
+}
+
+.richvision-registration-form h2 {
+    text-align: center;
+    margin-bottom: 20px;
+    color: #333;
+}
+
+.richvision-registration-form .form-group {
+    margin-bottom: 15px;
+}
+
+.richvision-registration-form label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: bold;
+    color: #555;
+}
+
+.richvision-registration-form input[type="text"],
+.richvision-registration-form input[type="email"],
+.richvision-registration-form input[type="password"],
+.richvision-registration-form select {
+    width: calc(100% - 12px);
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+    margin-bottom: 5px;
+}
+.richvision-registration-form select{
+	height: 40px;
+}
+.richvision-registration-form .submit-button {
+    display: block;
+    width: 100%;
+    padding: 10px;
+    background-color: #5cb85c;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.richvision-registration-form .submit-button:hover {
+    background-color: #4cae4c;
+}
+.richvision-registration-form .message{
+	text-align: center;
+	margin-top: 10px;
+    padding: 10px;
+    border-radius: 5px;
+}
+.richvision-registration-form .message.success{
+	background-color: #d4edda;
+    color: #155724;
+	border: 1px solid #c3e6cb;
+}
+.richvision-registration-form .message.error{
+	background-color: #f8d7da;
+    color: #721c24;
+	border: 1px solid #f5c6cb;
+}
