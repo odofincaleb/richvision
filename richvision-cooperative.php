@@ -26,20 +26,14 @@ define('RICHVISION_COOPERATIVE_PLUGIN_URL', plugin_dir_url(__FILE__));
 /**
  * Activation Hook
  */
-function richvision_cooperative_activate() {
-    require_once RICHVISION_COOPERATIVE_PLUGIN_DIR . 'includes/class-richvision-cooperative-activator.php';
-    RichVision_Cooperative_Activator::activate();
-}
-register_activation_hook( __FILE__, 'richvision_cooperative_activate' );
+require_once RICHVISION_COOPERATIVE_PLUGIN_DIR . 'includes/class-richvision-cooperative-activator.php';
+register_activation_hook( __FILE__, [ 'RichVision_Cooperative_Activator', 'activate' ] );
 
 /**
  * Deactivation Hook
  */
-function richvision_cooperative_deactivate() {
-    require_once RICHVISION_COOPERATIVE_PLUGIN_DIR . 'includes/class-richvision-cooperative-deactivator.php';
-    RichVision_Cooperative_Deactivator::deactivate();
-}
-register_deactivation_hook( __FILE__, 'richvision_cooperative_deactivate' );
+require_once RICHVISION_COOPERATIVE_PLUGIN_DIR . 'includes/class-richvision-cooperative-deactivator.php';
+register_deactivation_hook( __FILE__, [ 'RichVision_Cooperative_Deactivator', 'deactivate' ] );
 
 
 /**
