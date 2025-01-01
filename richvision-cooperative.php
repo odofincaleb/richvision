@@ -23,6 +23,7 @@ if ( ! defined( 'WPINC' ) ) {
 define('RICHVISION_COOPERATIVE_PLUGIN_DIR', plugin_dir_path(__FILE__));
 define('RICHVISION_COOPERATIVE_PLUGIN_URL', plugin_dir_url(__FILE__));
 
+
 /**
  * Activation Hook
  */
@@ -39,34 +40,58 @@ register_deactivation_hook( __FILE__, [ 'RichVision_Cooperative_Deactivator', 'd
 /**
  * Core plugin class
  */
-require_once RICHVISION_COOPERATIVE_PLUGIN_DIR . 'includes/class-richvision-cooperative.php';
+try {
+    require_once RICHVISION_COOPERATIVE_PLUGIN_DIR . 'includes/class-richvision-cooperative.php';
 
-// Instantiate the main plugin class.
-if ( class_exists( 'RichVision_Cooperative' ) ) {
-	new RichVision_Cooperative();
+    // Instantiate the main plugin class.
+    if ( class_exists( 'RichVision_Cooperative' ) ) {
+        new RichVision_Cooperative();
+    }
+} catch (Throwable $e) {
+    $error_message = sprintf(
+        "RichVision Plugin Activation Error:\nMessage: %s\nFile: %s\nLine: %s\nTrace: %s",
+        $e->getMessage(),
+        $e->getFile(),
+        $e->getLine(),
+        $e->getTraceAsString()
+    );
+    error_log($error_message);
 }
+
 
 /**
  * Helper function to load files
  */
 function load_files($dir){
-  if ( ! is_dir( $dir ) ){
-		return;
-	}
+    if ( ! is_dir( $dir ) ){
+        return;
+    }
 
     $files = scandir( $dir );
 
-	foreach ( $files as $file ) {
-		if ( in_array( $file, ['.', '..'] ) ) {
-			continue;
-		}
+    foreach ( $files as $file ) {
+        if ( in_array( $file, ['.', '..'] ) ) {
+            continue;
+        }
 
-		if ( is_dir( $dir . '/' . $file ) ){
-			load_files( $dir . '/' . $file );
+        if ( is_dir( $dir . '/' . $file ) ){
+            load_files( $dir . '/' . $file );
         }
         elseif ( pathinfo( $file, PATHINFO_EXTENSION ) === 'php' ) {
-            require_once $dir . '/' . $file;
+            try{
+                require_once $dir . '/' . $file;
+            } catch (Throwable $e) {
+               $error_message = sprintf(
+                   "RichVision Plugin File Load Error:\nMessage: %s\nFile: %s\nLine: %s\nTrace: %s",
+                   $e->getMessage(),
+                   $e->getFile(),
+                   $e->getLine(),
+                   $e->getTraceAsString()
+               );
+               error_log($error_message);
+           }
+
         }
-	}
+    }
 }
 load_files(RICHVISION_COOPERATIVE_PLUGIN_DIR . 'includes');
