@@ -107,7 +107,13 @@ class RichVision_Cooperative{
 		$this->handle_registration_form();
 
 		ob_start();
-		include RICHVISION_COOPERATIVE_PLUGIN_DIR . 'templates/registration-form.php';
+        $template_path = RICHVISION_COOPERATIVE_PLUGIN_DIR . 'templates/registration-form.php';
+		if ( file_exists( $template_path ) ) {
+            include $template_path;
+        } else {
+            error_log("RichVision Plugin Error: Registration form template not found at: " . $template_path);
+            echo 'Error: Registration form template not found.';
+        }
 		return ob_get_clean();
 	}
 	/**
