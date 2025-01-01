@@ -49,7 +49,7 @@ require_once RICHVISION_COOPERATIVE_PLUGIN_DIR . 'includes/class-richvision-coop
 
 // Instantiate the main plugin class.
 if ( class_exists( 'RichVision_Cooperative' ) ) {
-	$richvision_cooperative = new RichVision_Cooperative();
+	new RichVision_Cooperative();
 }
 
 /**
